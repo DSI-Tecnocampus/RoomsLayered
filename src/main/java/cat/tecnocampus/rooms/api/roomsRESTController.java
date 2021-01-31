@@ -65,6 +65,11 @@ public class roomsRESTController {
             return roomController.getNotFullyOccupiedClassrooms(dayOfWeek);
     }
 
+    @GetMapping("/weather/{cityName}")
+    public WeatherDTO getWeather(@PathVariable String cityName) {
+        return weatherController.getWeather(cityName);
+    }
+
     @PostMapping("/students")
     public void postStudent(@RequestBody @Valid StudentDTO student) {
         roomController.setNewStudent(student);
@@ -76,11 +81,5 @@ public class roomsRESTController {
         StudentDTO studentDTO = roomController.getStudent(studentId);
         roomController.allocateStudentInClassroom(studentDTO, name, dayOfWeek.toUpperCase());
     }
-
-    @GetMapping("/weather/{cityName}")
-    public WeatherDTO getWeather(@PathVariable String cityName) {
-        return weatherController.getWeather(cityName);
-    }
-
 
 }
